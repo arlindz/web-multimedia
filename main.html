@@ -1,22 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Particle Effect</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <h1>HELLO WORLD</h1>
-  <script src="https://pixijs.download/release/pixi.js"></script>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - E-commerce Store</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        padding-top: 60px; /* Adjust the top padding based on the height of your navbar */
+      }
+      .jumbotron {
+        background-color: #f8f9fa;
+        padding: 80px 0;
+      }
+      .feature-icon {
+        font-size: 3rem;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">E-commerce Store</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link active" href="./main.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./products.html">Products</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1 class="display-4">About Us</h1>
+        <p class="lead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          feugiat nunc at elit fermentum, nec aliquam odio posuere.
+        </p>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="text-center">
+              <i class="fas fa-truck feature-icon mb-4"></i>
+              <h3>Fast Shipping</h3>
+              <p class="text-muted">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="text-center">
+              <i class="fas fa-award feature-icon mb-4"></i>
+              <h3>Quality Products</h3>
+              <p class="text-muted">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="text-center">
+              <i class="fas fa-lock feature-icon mb-4"></i>
+              <h3>Secure Payments</h3>
+              <p class="text-muted">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4" style="margin-top: 90px">
+      <div class="container text-center">
+        <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>
