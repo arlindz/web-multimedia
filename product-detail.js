@@ -1,7 +1,8 @@
 window.addEventListener('load', () => {
     const productDetail = JSON.parse(localStorage.getItem('productDetail'));
-
+    console.log("ran")
     if (productDetail) {
+        console.log(productDetail);
         document.getElementById('product-title').textContent = productDetail.title;
         document.getElementById('product-description').textContent = productDetail.description;
         document.getElementById('product-image').src = productDetail.image;

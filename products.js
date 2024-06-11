@@ -1,4 +1,5 @@
 window.addEventListener('load', () => {
+    console.log("loaded")
     const pages = [];
     const buttons = [];
     const BEGIN_PAGE = 1;
@@ -9,29 +10,29 @@ window.addEventListener('load', () => {
     for (let i = BEGIN_PAGE; document.getElementById(`page${i}-pagination-button`); i++) {
         buttons.push(document.getElementById(`page${i}-pagination-button`));
     }
-
+    console.log(buttons);
     for (let i = 0; i < pages.length; i++) {
         buttons[i].addEventListener('click', () => {
             for (let j = 0; j < pages.length; j++) {
                 pages[j].style.display = 'none';
+                console.log("Clicked ");
             }
             pages[i].style.display = 'flex';
         });
     }
-
     const productCards = document.querySelectorAll('.product-card');
     productCards.forEach(card => {
         card.addEventListener('click', () => {
-            const title = card.getAttribute('data-title');
-            const description = card.getAttribute('data-description');
-            const image = card.getAttribute('data-image');
-            const video = card.getAttribute('data-video');
-            const rating = card.getAttribute('data-rating');
-            const reviews = card.getAttribute('data-reviews');
-            const price = card.getAttribute('data-price');
-
-            localStorage.setItem('productDetail', JSON.stringify({ title, description, image, video, rating, reviews, price }));
-            window.location.href = 'product-detail.html';
+            const title = card.querySelector('.card-title').textContent;
+            const description = card.querySelector('.card-text').textContent;
+            const rating = card.querySelector('.card-rating').textContent;
+            const reviews = card.querySelector('.card-rating-count').textContent;
+            const image = card.querySelector('.card-img-top').getAttribute('src');
+            const price = card.querySelector('.card-price').textContent;
+            const video = card.querySelector('.video-link').textContent;
+            console.log(video);
+            localStorage.setItem('productDetail', JSON.stringify({ title, description, image, rating, reviews, price, video }));
+            window.location.href = 'products/product.html';
         });
     });
 });
