@@ -30,7 +30,7 @@ window.addEventListener('load', () => {
             const image = card.querySelector('.card-img-top').getAttribute('src');
             const price = card.querySelector('.card-price').textContent;
             const video = card.querySelector('.video-link').textContent;
-            console.log(video);
+            
             localStorage.setItem('productDetail', JSON.stringify({ title, description, image, rating, reviews, price, video }));
             window.location.href = 'products/product.html';
         });

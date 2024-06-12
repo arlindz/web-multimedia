@@ -1,13 +1,19 @@
 const SIZE = 2; // Global variable for particle size
-const COUNT = 200; // Global variable for particle count
+const COUNT = 300; // Global variable for particle count
 
 const GRAVITY = 0.05; // Global variable for gravity
 const SPEED = 50; // Global variable for speed
 
+const SPAWN_X = 750; // X coordinate of the spawn point
+const SPAWN_Y = 185; // Y coordinate of the spawn point
+const HORIZONTAL_DISTANCE = 1100; // Horizontal distance for the square path
+const VERTICAL_DISTANCE = 190; // Vertical distance for the square path
+
 async function main() {
-    const app = new PIXI.Application();
-    await app.init({ width: 640, height: 360 });
-    document.body.appendChild(app.canvas);
+    const app = new PIXI.Application({ backgroundColor: 0x000000 });
+    await app.init({ width: window.screen.width, height: 400 });
+    const pixiContainer = document.getElementById('pixi-container');
+    pixiContainer.appendChild(app.view);
 
     // Create the sprite and add it to the stage
     await PIXI.Assets.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png');
@@ -15,25 +21,41 @@ async function main() {
     app.stage.addChild(sprite);
 
     // Set initial position of the sprite
-    sprite.x = app.screen.width / 2;
-    sprite.y = app.screen.height / 2;
+    sprite.x = SPAWN_X;
+    sprite.y = SPAWN_Y;
 
     // Create particle effect
     createParticleEffect(app.stage, app);
 
     // Add a ticker callback to move the sprite
     let time = 0;
+
     app.ticker.add((ticker) => {
-        time += ticker.deltaTime;
-        const x = Math.sin(time / (1000 / SPEED)) * (100 * SPEED / 500); // Adjust the coefficient to control the width of the path based on speed
-        const y = Math.sin(time / (500 / SPEED)) * (50 * SPEED / 500); // Adjust the coefficient to control the height of the path based on speed
-        sprite.x = app.screen.width / 2 + x;
-        sprite.y = app.screen.height / 2 + y;
+        time += ticker.deltaTime * (SPEED / 50); // Adjust time increment based on speed
+        const phase = (time % (4 * VERTICAL_DISTANCE)) / VERTICAL_DISTANCE;
+
+        if (phase < 1) {
+            sprite.x = SPAWN_X + HORIZONTAL_DISTANCE / 2;
+            sprite.y = SPAWN_Y - VERTICAL_DISTANCE / 2 + phase * VERTICAL_DISTANCE;
+        } else if (phase < 2) {
+            sprite.x = SPAWN_X + HORIZONTAL_DISTANCE / 2 - (phase - 1) * HORIZONTAL_DISTANCE;
+            sprite.y = SPAWN_Y + VERTICAL_DISTANCE / 2;
+        } else if (phase < 3) {
+            sprite.x = SPAWN_X - HORIZONTAL_DISTANCE / 2;
+            sprite.y = SPAWN_Y + VERTICAL_DISTANCE / 2 - (phase - 2) * VERTICAL_DISTANCE;
+        } else {
+            sprite.x = SPAWN_X - HORIZONTAL_DISTANCE / 2 + (phase - 3) * HORIZONTAL_DISTANCE;
+            sprite.y = SPAWN_Y - VERTICAL_DISTANCE / 2;
+        }
     });
 }
 
 async function createParticleEffect(container, app) {
     const particles = [];
+    const cols = Math.sqrt(COUNT);
+    const rows = Math.ceil(COUNT / cols);
+    const xSpacing = container.width / cols;
+    const ySpacing = container.height / rows;
 
     // Create particles
     for (let i = 0; i < COUNT; i++) {
@@ -48,8 +70,11 @@ async function createParticleEffect(container, app) {
         particle.velocityX = Math.random() * 2 - 1; // Random velocity in x direction
         particle.velocityY = Math.random() * 2 - 1; // Random velocity in y direction
 
-        particle.x = Math.random() * container.width; // Random x position within the canvas width
-        particle.y = Math.random() * container.height; // Random y position within the canvas height
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+
+        particle.x = col * xSpacing + xSpacing / 2; // Evenly distribute particles in x direction
+        particle.y = row * ySpacing + ySpacing / 2; // Evenly distribute particles in y direction
 
         particles.push(particle);
         container.addChild(particle);
