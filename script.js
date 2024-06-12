@@ -1,5 +1,5 @@
 const SIZE = 2; // Global variable for particle size
-const COUNT = 300; // Global variable for particle count
+const COUNT = 200; // Global variable for particle count
 
 const GRAVITY = 0.05; // Global variable for gravity
 const SPEED = 50; // Global variable for speed
